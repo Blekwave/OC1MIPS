@@ -1,0 +1,28 @@
+data:
+
+main:
+
+addi $t4, $zero, 0
+addi $t5, $zero, 1
+addi $t6, $zero, 15
+addi $t0, $zero, 16384
+addi $t1, $zero, 16385
+
+loop:
+
+and $s0, $t1, $t0
+andi $s1, $t0, 16384
+
+or $s0, $t1, $t0
+ori $s1, $t0, 16384
+
+xor $s0, $t1, $t0
+xori $s1, $t0, 16384
+
+nor $s0, $t1, $t0
+
+addi $t4, $t4, 1
+srlv $t0, $t0, $t5
+srlv $t1, $t1, $t5
+
+bne $t4, $t6, loop

@@ -1,0 +1,38 @@
+data:
+
+main:
+
+addi $s0, $zero, 32767
+addi $s1, $zero, 2
+addi $s2, $zero, -2
+addi $s3, $zero, -32767
+
+add $s4, $s1, $s1
+add $s4, $s1, $s2
+
+sub $s4, $s1, $s2
+sub $s4, $s1, $s1
+
+bgtz $s1, greater
+j fail
+
+greater:
+add $s5, $zero, $s1
+bgtz $zero, fail
+blez $zero, equal
+j fail
+
+equal:
+add $s5, $zero, $zero
+blez $s1, fail
+blez $s2, less
+j fail
+
+less:
+add $s5, $zero, $s2
+j end
+
+fail:
+add $s5, $zero, $s3
+
+end:
