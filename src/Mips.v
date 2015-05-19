@@ -280,7 +280,7 @@ module Mips (
     ////////////
 
     Memory memory_i (
-        .clock(half_clock),
+        .clock(clock),
         .reset(reset),
         //Execute
         .ex_mem_readmem(ex_mem_readmem),
