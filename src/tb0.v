@@ -42,7 +42,7 @@ module Mips_TB;
     );
 
     initial begin
-        $readmemh("arithmetics.txt", ram_i.memory);
+        $readmemh("arithmetics_split.hex", ram_i.memory);
 
         $dumpfile("mips_tb0.vcd");
         $dumpvars;
