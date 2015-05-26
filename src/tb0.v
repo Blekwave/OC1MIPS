@@ -12,7 +12,6 @@ module Mips_TB;
     wire hb_mask;
     wire lb_mask;
     wire chip_en;
-    
 
     Ram ram_i (
         .addr(addr),
@@ -51,14 +50,14 @@ module Mips_TB;
     end
 
     initial begin
-        clock = 0;
-        reset = 1;
-        #1 reset = 0;
-        #2 reset = 1;
+        clock <= 0;
+        reset <= 1;
+        #2 reset <= 0;
+        #2 reset <= 1;
     end
 
     always begin
-        #2 clock = ~clock;
+        #3 clock <= ~clock;
     end
 
 endmodule

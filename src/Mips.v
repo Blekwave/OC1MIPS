@@ -21,18 +21,17 @@ module Mips (
     /////////////////
     
     reg half_clock;
-    reg [1:0] half_clock_aux;
-    always @(posedge clock or negedge reset) begin
-        if (~reset) begin
-            // É importante lidar com o reset para o clock lento, visto que ele
-            // pode causar dessincronia.
-            half_clock_aux = 2'b00;
-            half_clock = 0;
-        end else begin 
-            half_clock_aux = half_clock_aux + 2'b01;
-            half_clock = half_clock_aux[0];
-        end
+    always @(negedge reset) begin
+        // É importante lidar com o reset para o clock lento, visto que ele
+        // pode causar dessincronia.
+        half_clock <= 0;
     end
+
+    always @(posedge clock) begin
+        half_clock <= ~half_clock;
+    end
+
+
 
     ////////////
     // WIRING //
@@ -280,7 +279,7 @@ module Mips (
     ////////////
 
     Memory memory_i (
-        .clock(clock),
+        .clock(half_clock),
         .reset(reset),
         //Execute
         .ex_mem_readmem(ex_mem_readmem),
