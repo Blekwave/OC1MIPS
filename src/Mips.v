@@ -22,7 +22,7 @@ module Mips (
     
     reg half_clock;
     always @(negedge reset) begin
-        // É importante lidar com o reset para o clock lento, visto que ele
+        // É importante lidar com o reset do clock lento, visto que ele
         // pode causar dessincronia.
         half_clock <= 0;
     end
@@ -36,26 +36,6 @@ module Mips (
     ////////////
     // WIRING //
     ////////////
-
-    ///////////////
-    // Registers //
-    ///////////////
-    
-    wire [4:0] addra;
-    wire [31:0] dataa;
-    wire [31:0] ass_dataa;
-    wire [4:0] addrb;
-    wire [31:0] datab;
-    wire [31:0] ass_datab;
-    wire enc;
-    wire [4:0] addrc;
-    wire [31:0] datac;
-    wire [4:0] addrout;
-    wire [31:0] regout;
-
-    /////////////////////
-    // PIPELINE STAGES //
-    /////////////////////
 
     ///////////
     // Fetch //
@@ -96,6 +76,13 @@ module Mips (
     wire [4:0] id_ex_regdest;
     wire id_ex_writereg;
     wire id_ex_writeov;
+    // Usado em Registers
+    wire [4:0] id_reg_addra;
+    wire [4:0] id_reg_addrb;
+    wire [31:0] reg_id_dataa;
+    wire [31:0] reg_id_datab;
+    wire [31:0] reg_id_ass_dataa;
+    wire [31:0] reg_id_ass_datab;
 
     /////////////
     // Execute //
@@ -124,6 +111,15 @@ module Mips (
     wire mem_wb_writereg;
     wire [31:0] mem_wb_wbvalue;
 
+    ///////////////
+    // Writeback //
+    ///////////////
+    
+    // Usado em Registers
+    wire wb_reg_en;
+    wire [4:0] wb_reg_addr;
+    wire [31:0] wb_reg_data;
+
     ////////////////
     // INSTÂNCIAS //
     ////////////////
@@ -135,17 +131,15 @@ module Mips (
     Registers registers_i (
         .clock(half_clock),
         .reset(reset),
-        .addra(addra),
-        .dataa(dataa),
-        .ass_dataa(ass_dataa),
-        .addrb(addrb),
-        .datab(datab),
-        .ass_datab(ass_datab),
-        .enc(enc),
-        .addrc(addrc),
-        .datac(datac),
-        .addrout(addrout),
-        .regout(regout)
+        .addra(id_reg_addra),
+        .dataa(reg_id_dataa),
+        .ass_dataa(reg_id_ass_dataa),
+        .addrb(id_reg_addrb),
+        .datab(reg_id_datab),
+        .ass_datab(reg_id_ass_datab),
+        .enc(wb_reg_en),
+        .addrc(wb_reg_addr),
+        .datac(wb_reg_data)
     );
 
     ///////////////////
@@ -229,12 +223,12 @@ module Mips (
         .id_ex_writereg(id_ex_writereg),
         .id_ex_writeov(id_ex_writeov),
         //Registers
-        .id_reg_addra(addra),
-        .id_reg_addrb(addrb),
-        .reg_id_dataa(dataa),
-        .reg_id_datab(datab),
-        .reg_id_ass_dataa(ass_dataa),
-        .reg_id_ass_datab(ass_datab)
+        .id_reg_addra(id_reg_addra),
+        .id_reg_addrb(id_reg_addrb),
+        .reg_id_dataa(reg_id_dataa),
+        .reg_id_datab(reg_id_datab),
+        .reg_id_ass_dataa(reg_id_ass_dataa),
+        .reg_id_ass_datab(reg_id_ass_datab)
     );
 
 
@@ -309,8 +303,8 @@ module Mips (
         .mem_wb_writereg(mem_wb_writereg),
         .mem_wb_wbvalue(mem_wb_wbvalue),
         //Registers
-        .wb_reg_en(enc),
-        .wb_reg_addr(addrc),
-        .wb_reg_data(datac)
+        .wb_reg_en(wb_reg_en),
+        .wb_reg_addr(wb_reg_addr),
+        .wb_reg_data(wb_reg_data)
     );
 endmodule

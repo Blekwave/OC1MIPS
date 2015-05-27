@@ -41,10 +41,12 @@ module Mips_TB;
     );
 
     initial begin
-        $readmemh("arithmetics_split.hex", ram_i.memory);
+        $readmemh("arith_basic_split.hex", ram_i.memory);
 
         $dumpfile("mips_tb0.vcd");
         $dumpvars;
+
+        $monitor("%b%b", ram_i.memory[0], ram_i.memory[1]);
 
         #500 $finish;
     end
