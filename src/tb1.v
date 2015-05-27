@@ -1,10 +1,9 @@
 /**
- * Testbench 0 - ALU
- * Esse testbench básico realiza testes aritméticos, realizando várias adições.
- * Sua função principal é garantir que o esqueleto dos testbenches esteja fun-
- * cionando corretamente, assim como testar instruções básicas da ALU, necessá-
- * rias para o bom funcionamento de qualquer outro programa. São monitorados os
- * sinais de entrada da ALU, do opcode e da saída desse módulo
+ * Testbench 1 - ALU, Shift, Branching
+ * Esse testbench realiza testes aritméticos, realizando adições e shifts.
+ * Os sinais de controle monitorados se referem às entradas da ALU, ao opcode 
+ * e à saída desse módulo, assim como a entrada do Shifter, do valor de shift 
+ * e da sua saída.
  */
 module Mips_TB;
     reg clock, reset;
@@ -49,15 +48,15 @@ module Mips_TB;
     );
 
     initial begin
-        $readmemh("tb0_arith_basic_split.hex", ram_i.memory);
+        $readmemh("tb1_shiftme_split.hex", ram_i.memory);
 
-        $dumpfile("mips_tb0.vcd");
+        $dumpfile("mips_tb1.vcd");
         $dumpvars;
 
-        $display("\t\tA\tB\tOut\tAluOP");
-        $monitor("\t%d%d%d\t%d", mips_i.execute_i.id_ex_rega, mips_i.execute_i.mux_imregb, mips_i.execute_i.aluout, mips_i.execute_i.id_ex_aluop);
-
-        #500 $finish;
+        $display("\t\tAluA\tAluB\tAluOut\tAluOP\tShiftIn\tShiftAmt\tResult");
+        $monitor("\t%d%d%d\t%d\t%d\t%d%d", mips_i.execute_i.id_ex_rega, mips_i.execute_i.mux_imregb, mips_i.execute_i.aluout, mips_i.execute_i.id_ex_aluop,
+                                 mips_i.execute_i.id_ex_regb, mips_i.execute_i.id_ex_shiftamt, mips_i.execute_i.result);
+        #5000 $finish;
     end
 
     initial begin

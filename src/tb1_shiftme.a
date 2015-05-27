@@ -1,0 +1,25 @@
+nop
+nop
+addi $s0, $zero, 16384
+addi $s1, $zero, -16384
+addi $s2, $zero, 16384
+addi $s3, $zero, -16384
+addi $t1, $zero, 15
+addi $t2, $zero, 1
+addi $t3, $zero, 0
+
+loop:
+nop
+nop
+
+srlv $s0, $s0, $t2
+srav $s1, $s1, $t2
+srav $s2, $s2, $t2
+srlv $s3, $s3, $t2
+
+addi $t3,$t3,1
+nop
+nop
+nop
+
+bne $t3, $t1, loop
