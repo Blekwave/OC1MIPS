@@ -1,0 +1,51 @@
+nop
+nop
+addi $s1, $zero, 20
+addi $s0, $zero, 1
+
+clear:
+addi $t0, $zero, 0
+addi $t1, $zero, 8192
+addi $t2, $zero, 0
+beq $zero, $s0, loop_sum
+
+loop_create:
+nop
+nop
+nop
+addi $t0, $t0, 1
+nop
+nop
+nop
+sw $t0, 0($t1)
+addi $t1, $t1, 4
+bne $t0, $s1, loop_create
+addi $s0, $zero, 0
+j clear
+
+loop_sum:
+lw $t3, 0($t1)
+nop
+nop
+nop
+nop
+nop
+add $t0, $t0, $t3
+addi $t1, $t1, 4
+addi $t2, $t2, 1
+nop
+nop
+nop
+bne $s1, $t2, loop_sum
+sw $t0, 0($t1)
+nop
+nop
+nop
+nop
+nop
+lw $s3, 0($t1)
+nop
+nop
+nop
+nop
+nop
