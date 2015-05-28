@@ -4,7 +4,10 @@
  *
  * O teste efetua todas as operações booleanas implementadas, e esperasse
  * que os resultado das mesmas rodando no nosso processador sejam iguais
- * aos gerados pelos ambientes Mars 4.5 e QtSpim 9.1.12 
+ * aos gerados pelos ambientes Mars 4.5 e QtSpim 9.1.12 . 15 testes são
+ * efetuados para cada, começando com os bits de 16384 e 16385, sendo que
+ * cada operação é testada antes de "shiftear" os dois números para a direita
+ * em uma casa.
  *
  * Os sinais de controle monitorados se referem às entradas de dados dos
  * registradores.
@@ -57,9 +60,9 @@ module Mips_TB;
         $dumpfile("mips_tb2.vcd");
         $dumpvars;
 
-        $display("\t\tMem Read/Write\tMem Address\tMem data\tResult");
-        $monitor("\t%d\t%d\t%d\t%d", mips_i.memcontroller_i.mem_mc_rw, mips_i.memcontroller_i.mem_mc_addr, 
-                                     mips_i.memcontroller_i.mem_mc_data, mips_i.registers_i.dataa);
+        $display("Results - compare with known values");
+        $display("\t\tBoolean test\tBoolean immediate");
+        $monitor("\t%d\t%d", mips_i.registers_i.registers[16], mips_i.registers_i.registers[17]);
         #5000 $finish;
     end
 
