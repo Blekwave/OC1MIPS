@@ -62,8 +62,8 @@ module Mips_TB;
         $dumpvars;
 
         $display("\t\tMem Read/Write\tMem Address\tMem data\tResult");
-        $monitor("\t%d\t%d\t%d\t%d", memcontroller_i.mem_mc_rw, memcontroller_i.mem_mc_addr, 
-                                     memcontroller_i.mem_mc_data, registers_i.dataa);
+        $monitor("\t%d\t%d\t%d\t%d", mips_i.memcontroller_i.mem_mc_rw, mips_i.memcontroller_i.mem_mc_addr, 
+                                     mips_i.memcontroller_i.mem_mc_data, mips_i.registers_i.dataa);
         #5000 $finish;
     end
 
