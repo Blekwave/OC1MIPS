@@ -51,6 +51,7 @@ module Fetch (
                     endcase
                 end else begin
                     pc <= pc + 32'h0000_0004;
+                    if_id_nextpc <= pc;
                 end
             end
         end

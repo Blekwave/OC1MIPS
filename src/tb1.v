@@ -54,7 +54,7 @@ module Mips_TB;
         $dumpvars;
 
         $display("\t\tAluA\tAluB\tAluOut\tAluOP\tShiftIn\tShiftAmt\tResult");
-        $monitor("\t%d%d%d\t%d\t%d\t%d%d", mips_i.execute_i.id_ex_rega, mips_i.execute_i.mux_imregb, mips_i.execute_i.aluout, mips_i.execute_i.id_ex_aluop,
+        $monitor("\t%d%d%d\t%d\t%d\t%d%d\t%d", mips_i.execute_i.id_ex_rega, mips_i.execute_i.mux_imregb, mips_i.execute_i.aluout, mips_i.execute_i.id_ex_aluop,
                                  mips_i.execute_i.id_ex_regb, mips_i.execute_i.id_ex_shiftamt, mips_i.execute_i.result);
         #5000 $finish;
     end
