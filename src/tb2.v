@@ -60,10 +60,11 @@ module Mips_TB;
         $dumpfile("mips_tb2.vcd");
         $dumpvars;
 
-        $display("\t\tMem Read/Write\tMem Address\tMem data\tResult");
+        $display("Mem Read/Write\tMem Address\tMem data\tResult\t$s1");
         $monitor("\t%d\t%d\t%d\t%d", mips_i.memcontroller_i.mem_mc_rw, mips_i.memcontroller_i.mem_mc_addr, 
-                                     mips_i.memcontroller_i.mem_mc_data, mips_i.registers_i.dataa);
-        #5000 $finish;
+                                     mips_i.memcontroller_i.mem_mc_data, mips_i.registers_i.dataa,
+                                     mips_i.registers_i.registers[17]);
+        #1000 $finish;
     end
 
     initial begin
