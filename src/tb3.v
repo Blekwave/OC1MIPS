@@ -1,15 +1,12 @@
 /**
- * Testbench 2 - ALU, Branching, Memory access
- * Esse testbench realiza testes aritméticos e de acesso à memória
+ * Testbench 3 - Boolean operations, shift.
+ * Esse testbench realiza testes de lógica booleana
  *
- * O teste cria um vetor de 1 a 20 na memória; depois prossegue para acumular
- * a soma desses valores, obtendo-os de volta da memória, e somando-os um a um num
- * registrador; e no final escreve esse resultado, soma de todos os números de 1 a
- * 20, na posição de memória consecutiva ao último elemento do vetor de 20 elementos
- * Depois disso, carrega esse número recém-calculado para s3, que, se tudo der
- * certo, deverá receber 210 (1+2+3..+20 = 210) vindo da memória
+ * O teste efetua todas as operações booleanas implementadas, e esperasse
+ * que os resultado das mesmas rodando no nosso processador sejam iguais
+ * aos gerados pelos ambientes Mars 4.5 e QtSpim 9.1.12 
  *
- * Os sinais de controle monitorados se referem às entradas da memória e dos
+ * Os sinais de controle monitorados se referem às entradas de dados dos
  * registradores.
  */
 module Mips_TB;
